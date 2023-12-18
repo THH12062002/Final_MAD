@@ -1,6 +1,19 @@
 import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
+// Cart
+export const postCart = (lapId) => (dispatch) => {
+  dispatch(addCart(lapId));
+};
+const addCart = (lapId) => ({
+  type: ActionTypes.ADD_CART,
+  payload: lapId
+});
+export const deleteCart = (lapId) => ({
+  type: ActionTypes.DELETE_CART,
+  payload: lapId
+});
+
 // favorites
 export const postFavorite = (lapId) => (dispatch) => {
   dispatch(addFavorite(lapId));

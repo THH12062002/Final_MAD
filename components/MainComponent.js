@@ -17,6 +17,7 @@ import Favorites from './FavoriteComponent';
 import Login from './LoginComponent';
 import Register from './RegisterComponent';
 import Category from './CategoryComponent';
+import Cart from './CartComponent';
 
 // redux
 import { connect } from 'react-redux';
@@ -90,29 +91,6 @@ function HomeNavigatorScreen() {
   );
 }
 
-function MenuNavigatorScreen() {
-  const MenuNavigator = createStackNavigator();
-  return (
-    <MenuNavigator.Navigator
-      initialRouteName='Menu'
-      screenOptions={{
-        headerStyle: { backgroundColor: '#7cc' },
-        headerTintColor: '#fff',
-        headerTitleStyle: { color: '#fff' }
-      }}>
-      <MenuNavigator.Screen name='Menu' component={Menu}
-        options={({ navigation }) => ({
-          headerTitle: 'Menu',
-          headerLeft: () => (<Icon name='menu' size={36} color='#fff' onPress={() => navigation.toggleDrawer()} />)
-        })} />
-      <MenuNavigator.Screen name='Lapdetail' component={Lapdetail}
-        options={{
-          headerTitle: 'Lap Detail'
-        }} />
-    </MenuNavigator.Navigator>
-  );
-}
-
 function AboutNavigatorScreen() {
   const AboutNavigator = createStackNavigator();
   return (
@@ -169,23 +147,43 @@ function OrderNavigatorScreen() {
   );
 }
 
-function FavoritesNavigatorScreen() {
-  const FavoritesNavigator = createStackNavigator();
+// function FavoritesNavigatorScreen() {
+//   const FavoritesNavigator = createStackNavigator();
+//   return (
+//     <FavoritesNavigator.Navigator initialRouteName='Favorites'
+//       screenOptions={{
+//         headerStyle: { backgroundColor: '#7cc' },
+//         headerTintColor: '#fff',
+//         headerTitleStyle: { color: '#fff' }
+//       }}>
+//       <FavoritesNavigator.Screen name='Favorites' component={Favorites}
+//         options={({ navigation }) => ({
+//           headerTitle: 'My Favorites',
+//           headerLeft: () => (<Icon name='menu' size={36} color='#fff' onPress={() => navigation.toggleDrawer()} />)
+//         })} />
+//       <FavoritesNavigator.Screen name='Lapdetail' component={Lapdetail}
+//         options={{ headerTitle: 'Lap Detail' }} />
+//     </FavoritesNavigator.Navigator>
+//   );
+// }
+
+function CartNavigatorScreen() {
+  const CartNavigator = createStackNavigator();
   return (
-    <FavoritesNavigator.Navigator initialRouteName='Favorites'
+    <CartNavigator.Navigator initialRouteName='Cart'
       screenOptions={{
         headerStyle: { backgroundColor: '#7cc' },
         headerTintColor: '#fff',
         headerTitleStyle: { color: '#fff' }
       }}>
-      <FavoritesNavigator.Screen name='Favorites' component={Favorites}
+      <CartNavigator.Screen name='Cart' component={Cart}
         options={({ navigation }) => ({
-          headerTitle: 'My Favorites',
+          headerTitle: 'My Cart',
           headerLeft: () => (<Icon name='menu' size={36} color='#fff' onPress={() => navigation.toggleDrawer()} />)
         })} />
-      <FavoritesNavigator.Screen name='Lapdetail' component={Lapdetail}
+      <CartNavigator.Screen name='Lapdetail' component={Lapdetail}
         options={{ headerTitle: 'Lap Detail' }} />
-    </FavoritesNavigator.Navigator>
+    </CartNavigator.Navigator>
   );
 }
 
@@ -206,10 +204,11 @@ function CategoryNavigatorScreen() {
         })} />
       <CategoryNavigator.Screen name='Menu' component={Menu}
         options={{ headerTitle: 'Menu' }} />
+        <CategoryNavigator.Screen name='Lapdetail' component={Lapdetail}
+        options={{ headerTitle: 'Lap Detail' }} />
     </CategoryNavigator.Navigator>
   );
 }
-
 
 function CustomDrawerContent(props) {
   const users = props.users;
@@ -265,13 +264,8 @@ function MainNavigatorScreen(props) {
         <MainNavigator.Screen name='CategoryScreen' component={CategoryNavigatorScreen}
         options={{
           title: 'Category', headerShown: false,
-          drawerIcon: ({ focused, size }) => (<Icon name='menu' size={size} color={focused ? '#7cc' : '#ccc'} />)
+          drawerIcon: ({ focused, size }) => (<Icon name='category' size={size} color={focused ? '#7cc' : '#ccc'} />)
         }} />
-      {/* <MainNavigator.Screen name='MenuScreen' component={MenuNavigatorScreen}
-        options={{
-          title: 'Menu', headerShown: false,
-          drawerIcon: ({ focused, size }) => (<Icon name='menu' size={size} color={focused ? '#7cc' : '#ccc'} />)
-        }} /> */}
       <MainNavigator.Screen name='ContactScreen' component={ContactNavigatorScreen}
         options={{
           title: 'Contact Us', headerShown: false,
@@ -286,9 +280,9 @@ function MainNavigatorScreen(props) {
             }} />)
           : null
       }
-      <MainNavigator.Screen name='FavoritesScreen' component={FavoritesNavigatorScreen}
+      <MainNavigator.Screen name='CartScreen' component={CartNavigatorScreen}
         options={{
-          title: 'My Favorites', headerShown: false,
+          title: 'My Cart', headerShown: false,
           drawerIcon: ({ focused, size }) => (<Icon name='heart' type='font-awesome' size={size} color={focused ? '#7cc' : '#ccc'} />)
         }} />
     </MainNavigator.Navigator>

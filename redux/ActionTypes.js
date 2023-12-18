@@ -17,6 +17,9 @@ export const PROMOS_FAILED = 'PROMOS_FAILED';
 // favorites
 export const ADD_FAVORITE = 'ADD_FAVORITE';
 export const DELETE_FAVORITE = 'DELETE_FAVORITE';
+// cart
+export const ADD_CART = 'ADD_CART';
+export const DELETE_CART = 'DELETE_CART';
 // users
 export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';

@@ -108,11 +108,11 @@ class RenderLap extends Component {
       onPanResponderEnd: (e, gestureState) => {
         if (recognizeDrag(gestureState) === 1) {
           Alert.alert(
-            'Add Favorite',
-            'Are you sure you wish to add ' + lap.name + ' to favorite?',
+            'Add to cart',
+            'Are you sure you wish to add ' + lap.name + ' to your cart?',
             [
               { text: 'Cancel', onPress: () => { /* nothing */ } },
-              { text: 'OK', onPress: () => { this.props.favorite ? alert('Already favorite') : this.props.onPressFavorite() } },
+              { text: 'OK', onPress: () => { this.props.cart ? alert('Already existed in your cart') : this.props.onPressCart() } },
             ]
           );
         }
@@ -132,8 +132,8 @@ class RenderLap extends Component {
           <Card.Divider />
           <Text style={{ margin: 10 }}>{lap.description}</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-            <Icon raised reverse name={this.props.favorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50'
-              onPress={() => this.props.favorite ? alert('Already favorite') : this.props.onPressFavorite()} />
+            <Icon raised reverse name={this.props.cart ? 'heart' : 'heart-o'} type='font-awesome' color='#f50'
+              onPress={() => this.props.cart ? alert('Already existed in your cart') : this.props.onPressCart()} />
             <Icon raised reverse name='pencil' type='font-awesome' color='blue'
               onPress={() => this.props.onPressComment()} />
           </View>
@@ -150,12 +150,12 @@ const mapStateToProps = (state) => {
   return {
     laptops: state.laptops,
     comments: state.comments,
-    favorites: state.favorites
+    cart: state.cart
   }
 };
-import { postFavorite, postComment } from '../redux/ActionCreators';
+import { postCart, postComment } from '../redux/ActionCreators';
 const mapDispatchToProps = (dispatch) => ({
-  postFavorite: (lapId) => dispatch(postFavorite(lapId)),
+  postCart: (lapId) => dispatch(postCart(lapId)),
   postComment: (lapId, rating, author, comment) => dispatch(postComment(lapId, rating, author, comment))
 
 });
@@ -171,7 +171,7 @@ class Lapdetail extends Component {
     const lapId = parseInt(this.props.route.params.lapId);
     const lap = this.props.laptops.laptops[lapId];
     const comments = this.props.comments.comments.filter((cmt) => cmt.lapId === lapId);
-    const favorite = this.props.favorites.some((el) => el === lapId);
+    const cart = this.props.cart.some((el) => el === lapId);
 
     return (
       <ScrollView>
@@ -180,7 +180,7 @@ class Lapdetail extends Component {
           <RenderSlider lap={lap} />
         </Animatable.View>
         <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
-          <RenderLap lap={lap} favorite={favorite} onPressFavorite={() => this.markFavorite(lapId)} onPressComment={() => this.setState({ showModal: true })} />
+          <RenderLap lap={lap} cart={cart} onPressCart={() => this.addtoCart(lapId)} onPressComment={() => this.setState({ showModal: true })} />
         </Animatable.View>
         <Animatable.View animation='fadeInUp' duration={2000} delay={1000}>
           <RenderComments comments={comments} />
@@ -194,8 +194,8 @@ class Lapdetail extends Component {
 
     );
   }
-  markFavorite(lapId) {
-    this.props.postFavorite(lapId);
+  addtoCart(lapId) {
+    this.props.postCart(lapId);
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Lapdetail);

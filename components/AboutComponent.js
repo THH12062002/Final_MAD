@@ -3,22 +3,57 @@ import { Text, FlatList } from 'react-native';
 import { Card, ListItem, Avatar } from 'react-native-elements';
 import { ScrollView } from 'react-native-virtualized-view';
 import * as Animatable from 'react-native-animatable';
+import { getDatabase, ref, child, onValue } from 'firebase/database';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from './LoadingComponent';
 
 class RenderHistory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            history1: '',
+            history2: ''
+        }
+    }
     render() {
-        return (
-            <Card>
-                <Card.Title>Our History</Card.Title>
-                <Card.Divider />
-                <Text style={{ margin: 10 }}>Looking ahead, TechHub Laptops aims to stay at the forefront of technological advancements. The shop plans to expand its range to include cutting-edge devices, such as gaming laptops and innovative accessories.</Text>
-                <Text style={{ margin: 10 }}>Additionally, TechHub Laptops envisions further community involvement, with plans to collaborate with schools and organizations to promote STEM education.</Text>
-            </Card>
+        if (this.props.isLoading) {
+            return (
+                <Card>
+                    <Card.Title>Our History</Card.Title>
+                    <Card.Divider />
+                    <Loading />
+                </Card>
+            );
+        } else if (this.props.errMess) {
+            return (
+                <Card>
+                    <Card.Title>Our History</Card.Title>
+                    <Card.Divider />
+                    <Text>{this.props.errMess}</Text>
+                </Card>
+            );
+        } else return (
+            <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
+                <Card>
+                    <Card.Title>Our History</Card.Title>
+                    <Card.Divider />
+                    <Text style={{ margin: 10 }}>{this.state.history1}</Text>
+                    <Text style={{ margin: 10 }}>{this.state.history2}</Text>
+                </Card>
+            </Animatable.View>
         );
     }
+    componentDidMount() {
+        const dbRef = ref(getDatabase());
+        onValue(child(dbRef, 'history/'), (snapshot) => {
+            const value = snapshot.val();
+            this.setState({
+                history1: value.history1,
+                history2: value.history2,
+            });
+        });
+    }
 }
-
 class RenderLeadership extends Component {
     render() {
         if (this.props.isLoading) {
@@ -73,6 +108,7 @@ const mapStateToProps = (state) => {
 class About extends Component {
     constructor(props) {
         super(props);
+
     }
     render() {
         return (
@@ -89,5 +125,6 @@ class About extends Component {
             </ScrollView>
         );
     }
+
 }
 export default connect(mapStateToProps)(About);
