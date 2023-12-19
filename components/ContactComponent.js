@@ -55,7 +55,7 @@ class Contact extends Component {
       }
       composeMail() {
         MailComposer.composeAsync({
-          recipients: ['hai.th13127@sinhvien.hoasen.edu.vn'],
+          recipients: ['laptopmocoi@gmail.com'],
           subject: 'From HaiTH',
           body: 'Hello my friends ...'
         });

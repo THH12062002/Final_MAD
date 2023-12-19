@@ -27,14 +27,24 @@ class Cart extends Component {
             return (<Text>{this.props.laptops.errMess}</Text>);
         } else {
             const laptops = this.props.laptops.laptops.filter((lap) => this.props.cart.some((el) => el === lap.id));
+
+            // Kiểm tra giỏ hàng rỗng
+            if (laptops.length === 0) {
+                return (
+                    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                        <Text>Your cart is empty</Text>
+                    </View>
+                );
+            }
+
             return (
                 <Animatable.View animation='fadeInRightBig' duration={2000}>
-                <SwipeListView data={laptops}
-                    renderItem={({ item, index }) => this.renderMenuItem(item, index)}
-                    renderHiddenItem={({ item, index }) => this.renderHiddenItem(item, index)}
-                    keyExtractor={(item) => item.id.toString()}
-                    rightOpenValue={-100} />
-                    </Animatable.View>
+                    <SwipeListView data={laptops}
+                        renderItem={({ item, index }) => this.renderMenuItem(item, index)}
+                        renderHiddenItem={({ item, index }) => this.renderHiddenItem(item, index)}
+                        keyExtractor={(item) => item.id.toString()}
+                        rightOpenValue={-100} />
+                </Animatable.View>
             );
         }
     }

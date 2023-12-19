@@ -147,26 +147,6 @@ function OrderNavigatorScreen() {
   );
 }
 
-// function FavoritesNavigatorScreen() {
-//   const FavoritesNavigator = createStackNavigator();
-//   return (
-//     <FavoritesNavigator.Navigator initialRouteName='Favorites'
-//       screenOptions={{
-//         headerStyle: { backgroundColor: '#7cc' },
-//         headerTintColor: '#fff',
-//         headerTitleStyle: { color: '#fff' }
-//       }}>
-//       <FavoritesNavigator.Screen name='Favorites' component={Favorites}
-//         options={({ navigation }) => ({
-//           headerTitle: 'My Favorites',
-//           headerLeft: () => (<Icon name='menu' size={36} color='#fff' onPress={() => navigation.toggleDrawer()} />)
-//         })} />
-//       <FavoritesNavigator.Screen name='Lapdetail' component={Lapdetail}
-//         options={{ headerTitle: 'Lap Detail' }} />
-//     </FavoritesNavigator.Navigator>
-//   );
-// }
-
 function CartNavigatorScreen() {
   const CartNavigator = createStackNavigator();
   return (
@@ -220,7 +200,7 @@ function CustomDrawerContent(props) {
           <Image source={{ uri: baseUrl + 'images/batman.png' }} style={{ margin: 10, width: 80, height: 60 }} />
         </View>
         <View style={{ flex: 2 }}>
-          <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>HaiTH</Text>
+          <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold' }}>Welcome {users.logged ? users.userinfo.username : 'Guest'}</Text>
         </View>
       </View>
       <DrawerItemList {...props} />
@@ -283,7 +263,7 @@ function MainNavigatorScreen(props) {
       <MainNavigator.Screen name='CartScreen' component={CartNavigatorScreen}
         options={{
           title: 'My Cart', headerShown: false,
-          drawerIcon: ({ focused, size }) => (<Icon name='heart' type='font-awesome' size={size} color={focused ? '#7cc' : '#ccc'} />)
+          drawerIcon: ({ focused, size }) => (<Icon name='shopping-cart' type='font-awesome' size={size} color={focused ? '#7cc' : '#ccc'} />)
         }} />
     </MainNavigator.Navigator>
   );
