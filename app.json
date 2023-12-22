@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "project",
-    "slug": "project",
+    "name": "HaiTH",
+    "slug": "haith",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -22,15 +22,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.haith.project"
+      "package": "com.haith.HaiTH"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "f1e04089-a5a5-4017-aaa6-f8df0a0b9a57"
+        "projectId": "7c90c2e9-301f-4acd-962c-c5afb82a54bf"
       }
-    }
+    },
+    "owner": "haith"
   }
 }

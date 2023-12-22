@@ -21,6 +21,7 @@
     "date-fns": "^2.30.0",
     "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~49.0.10",
+    "expo-calendar": "~11.3.2",
     "expo-image-picker": "~14.3.2",
     "expo-mail-composer": "~12.3.0",
     "expo-module-scripts": "^3.1.0",
@@ -48,8 +49,7 @@
     "redux": "^4.2.1",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.4.2",
-    "expo-calendar": "~11.3.2"
+    "redux-thunk": "^2.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0"
